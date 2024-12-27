@@ -14,6 +14,8 @@ router.post("/create", async (req, res) => {
 
     return res.status(201).json(newUser);
   } catch (error) {
+    //lidando com o erro
+    //usamos try catch para o server nao cair quando houver um erro
     console.log(error);
     return res.status(500).json(error);
   }
@@ -58,7 +60,7 @@ router.put("/update/:id", async (req, res) => {
       {
         ...req.body, //oq estiver no body sera atualizado
       },
-      { new: true, runValidators: true }
+      { new: true, runValidators: true } //atualiza as edicoes na DBs
     );
 
     return res.status(200).json(user);
@@ -68,6 +70,19 @@ router.put("/update/:id", async (req, res) => {
   }
 });
 
+//HARD DELETE -> EXCLUI O DOCUMENTO DA DB (N MUITO INDICADO)
+// router.delete("/delete/:id", async (req, res) => {
+//   try {
+//     const id = req.params.id;
+//     const deletedUser = await UserModel.findByIdAndDelete(id);
+//     return res.status(200).json("Usuário deletado com sucesso!");
+//   } catch (error) {
+//     console.log(error);
+//     return res.status(500).json(error);
+//   }
+// });
+
+//SOFT DELETE usa o active:false p desativar o user na DB, e nao excluir completamente
 // url: http://localhost:4000/user/delete/:id
 router.delete("/delete/:id", async (req, res) => {
   try {
