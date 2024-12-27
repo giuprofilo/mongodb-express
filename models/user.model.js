@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true,
+    timestamps: true, //mostra data e hora de criacao e alteracao
   }
 );
 
