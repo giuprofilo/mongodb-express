@@ -3,6 +3,8 @@ import * as dotenv from "dotenv";
 import express from "express";
 import connectDB from "./config/db.config.js";
 import cors from "cors";
+import recipeRoute from "./routes/recipe.routes.js";
+import notesRouter from "./routes/note.routes.js";
 
 // routes //
 import userRouter from "./routes/user.routes.js";
@@ -24,6 +26,8 @@ connectDB();
 
 //rotas para tabelas diferentes
 app.use("/user", userRouter);
+app.use("/recipe", recipeRoute);
+app.use("/note", notesRouter);
 
 // colocar o servidor no ar
 app.listen(4000, () => {

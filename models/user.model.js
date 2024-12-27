@@ -5,36 +5,45 @@ const userSchema = new mongoose.Schema(
     username: {
       type: String,
       required: true,
-      trim: true,
       unique: true,
+      trim: true,
     },
+
     email: {
       type: String,
       required: true,
       match: /.+\@.+\..+/, //regex
+      lowercase: true,
     },
+
     password: {
       type: String,
       required: true,
       trim: true,
-      minlength: 6,
+      minlength: 8,
     },
+    //enum
     role: {
       type: String,
-      required: true,
       enum: ["user", "admin"],
       default: "user",
     },
-    //algo com boolean
+
+    //boolean
     active: {
       type: Boolean,
       default: true,
     },
+
     age: {
       type: Number,
-      min: 18,
-      max: 65,
+      min: 16,
+      max: 110,
     },
+
+    recipes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Recipe" }],
+
+    notes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Note" }],
   },
   {
     timestamps: true, //mostra data e hora de criacao e alteracao
